@@ -154,7 +154,6 @@ namespace NuGet.PackageManagement.VisualStudio
                 project.RestoreMetadata.Sources = GetSources(settings, project);
                 project.RestoreMetadata.FallbackFolders = GetFallbackFolders(settings, project);
                 project.RestoreMetadata.ConfigFilePaths = GetConfigFilePaths(settings);
-                project.RestoreMetadata.CacheFilePath = GetCacheFilePathAsync(project);
                 projects.Add(project);
             }
 
@@ -385,17 +384,8 @@ namespace NuGet.PackageManagement.VisualStudio
                 }
             }
 
-            return Task.FromResult(GetCacheFilePathAsync(spec));
+            return Task.FromResult(NoOpRestoreUtilities.GetProjectCacheFile(cacheRoot: spec.RestoreMetadata.OutputPath, projectPath: spec.RestoreMetadata.ProjectPath));
         }
-
-        /// <summary>
-        /// Returns the cache file path based on the current packagespec
-        /// </summary>
-        private string GetCacheFilePathAsync(PackageSpec spec)
-        {
-            return NoOpRestoreUtilities.GetProjectCacheFile(cacheRoot : spec.RestoreMetadata.OutputPath, projectPath: spec.RestoreMetadata.ProjectPath);
-        }
-
         #endregion
     }
 }

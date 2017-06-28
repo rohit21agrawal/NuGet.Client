@@ -154,7 +154,7 @@ namespace NuGet.ProjectManagement.Projects
         protected virtual Task<string> GetBaseIntermediatePathAsync()
         {
             // Extending class will implement the functionality.
-            return null;
+            return Task.FromResult((string) null);
         }
        
         public override async Task<IReadOnlyList<PackageSpec>> GetPackageSpecsAsync(DependencyGraphCacheContext context)
@@ -358,7 +358,7 @@ namespace NuGet.ProjectManagement.Projects
         // Overriding class wil implement the method
         public override Task<string> GetCacheFilePathAsync()
         {
-            return null;
+            return Task.FromResult((string)null);
         }
     }
 }
